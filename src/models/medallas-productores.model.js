@@ -22,6 +22,8 @@ module.exports = function (app) {
   medallasProductores.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    medallasProductores.hasOne(models.PRODUCTOR, { foreignKey: 'id_caracteristica' });
+
   };
 
   return medallasProductores;

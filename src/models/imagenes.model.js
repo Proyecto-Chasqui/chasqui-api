@@ -5,10 +5,13 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const productos = sequelizeClient.define('PRODUCTO', {
+  const imagenes = sequelizeClient.define('IMAGEN', {
+    path: { type: DataTypes.STRING, allowNull: false },
     nombre: { type: DataTypes.STRING, allowNull: false },
-    id_productor: { type: DataTypes.INTEGER, allowNull: false },
-    ocultado: { type: DataTypes.BOOLEAN, allowNull: false },
+    id_variante: { type: DataTypes.INTEGER, allowNull: false },
+    orden: { type: DataTypes.INTEGER, allowNull: false },
+    id_data_portada: { type: DataTypes.INTEGER, allowNull: false },
+    id_data_banner: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     hooks: {
       beforeCount(options) {
@@ -18,14 +21,11 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  productos.associate = function (models) {
+  imagenes.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    productos.hasMany(models.VARIANTE, { foreignKey: 'id_producto'});
-    productos.belongsTo(models.CATEGORIA, {foreignKey: 'id_categoria'});
-    productos.belongsTo(models.PRODUCTOR, {foreignKey: 'id_productor'});
-    productos.belongsToMany(models.CARACTERISTICA, {through: 'PRODUCTO_CARACTERISTICA', foreignKey: 'id_producto'});
+    imagenes.belongsTo(models.IMAGEN, { foreignKey: 'id_variante' });
   };
 
-  return productos;
+  return imagenes;
 };

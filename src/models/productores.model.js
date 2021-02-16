@@ -29,6 +29,9 @@ module.exports = function (app) {
   productores.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    productores.hasMany(models.PRODUCTO, { foreignKey: 'id_productor' });
+    productores.belongsTo(models.CARACTERISTICA_PRODUCTOR, { foreignKey: 'id_caracteristica' });
+
   };
 
   return productores;

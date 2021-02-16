@@ -27,6 +27,7 @@ module.exports = function (app) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     productosVariantes.belongsTo(models.PRODUCTO, {foreignKey: 'id_producto'});
+    productosVariantes.hasMany(models.IMAGEN, { foreignKey: 'id_variante'});
   };
 
   return productosVariantes;

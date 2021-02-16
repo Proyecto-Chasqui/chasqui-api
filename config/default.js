@@ -3,8 +3,8 @@ const config = {
   "port": process.env.API_PORT,
   "public": "../public/",
   "paginate": {
-    "default": 10,
-    "max": 50
+    "default": 12,
+    "max": 100
   },
   "authentication": {
     "entity": "usuarios",
