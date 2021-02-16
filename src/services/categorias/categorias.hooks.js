@@ -1,15 +1,16 @@
 const { likeRegex } = require("../../hooks/misc.utils.js");
 const categoriaPopulate = require('../../hooks/categoria-populate');
+const { disallow } = require('feathers-hooks-common')
 
 module.exports = {
   before: {
     all: [],
     find: [likeRegex, categoriaPopulate()],
     get: [categoriaPopulate()],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [disallow],
+    update: [disallow],
+    patch: [disallow],
+    remove: [disallow]
   },
 
   after: {

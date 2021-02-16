@@ -1,6 +1,7 @@
 const { likeRegex } = require("../../hooks/misc.utils.js");
 const vendedores = require('../../hooks/vendedores');
 //const { debug } = require('feathers-hooks-common');
+const { disallow } = require('feathers-hooks-common')
 
 
 module.exports = {
@@ -13,44 +14,44 @@ module.exports = {
         const { QueryTypes } = require('sequelize');
         const result = await sequelize.query(
           `SELECT 
-              chasqui.IMAGEN.PATH,
-              chasqui.DATA_PORTADA.textoBienvenida,
-              chasqui.DATA_CONTACTO.telefono,
-              chasqui.DATA_CONTACTO.celular,
-              chasqui.DATA_CONTACTO.email,
-              chasqui.DATA_CONTACTO.url,
-              chasqui.DIRECCION.CALLE,
-              chasqui.DIRECCION.CALLEADYACENTE1,
-              chasqui.DIRECCION.CALLEADYACENTE2,
-              chasqui.DIRECCION.ALTURA,
-              chasqui.DIRECCION.LOCALIDAD,
-              chasqui.DIRECCION.CODIGO_POSTAL,
-              chasqui.DIRECCION.LATITUD,
-              chasqui.DIRECCION.LONGITUD,
-              chasqui.DIRECCION.PREDETERMINADA,
-              chasqui.DIRECCION.DEPARTAMENTO,
-              chasqui.DIRECCION.ALIAS,
-              chasqui.DIRECCION.COMENTARIO,
-              chasqui.DIRECCION.PAIS,
-              chasqui.DIRECCION.PROVINCIA,
-              chasqui.DIRECCION.ID
-          FROM chasqui.VENDEDOR 
-          left join chasqui.DATA_MULTIMEDIA on chasqui.DATA_MULTIMEDIA.idVendedor=chasqui.VENDEDOR.id
-          left join chasqui.DATA_PORTADA on chasqui.DATA_MULTIMEDIA.ID_DATA_PORTADA=chasqui.DATA_PORTADA.ID
-          left join chasqui.DATA_CONTACTO on chasqui.DATA_MULTIMEDIA.ID_DATA_CONTACTO=chasqui.DATA_CONTACTO.ID
-          left join chasqui.IMAGEN on chasqui.DATA_PORTADA.ID_IMAGEN_LOGO=chasqui.IMAGEN.ID
-          left join chasqui.DIRECCION on chasqui.DATA_CONTACTO.DIRECCION_CONTACTO=chasqui.DIRECCION.ID
+              IMAGEN.PATH,
+              DATA_PORTADA.textoBienvenida,
+              DATA_CONTACTO.telefono,
+              DATA_CONTACTO.celular,
+              DATA_CONTACTO.email,
+              DATA_CONTACTO.url,
+              DIRECCION.CALLE,
+              DIRECCION.CALLEADYACENTE1,
+              DIRECCION.CALLEADYACENTE2,
+              DIRECCION.ALTURA,
+              DIRECCION.LOCALIDAD,
+              DIRECCION.CODIGO_POSTAL,
+              DIRECCION.LATITUD,
+              DIRECCION.LONGITUD,
+              DIRECCION.PREDETERMINADA,
+              DIRECCION.DEPARTAMENTO,
+              DIRECCION.ALIAS,
+              DIRECCION.COMENTARIO,
+              DIRECCION.PAIS,
+              DIRECCION.PROVINCIA,
+              DIRECCION.ID
+          FROM VENDEDOR 
+          left join DATA_MULTIMEDIA on DATA_MULTIMEDIA.idVendedor=VENDEDOR.id
+          left join DATA_PORTADA on DATA_MULTIMEDIA.ID_DATA_PORTADA=DATA_PORTADA.ID
+          left join DATA_CONTACTO on DATA_MULTIMEDIA.ID_DATA_CONTACTO=DATA_CONTACTO.ID
+          left join IMAGEN on DATA_PORTADA.ID_IMAGEN_LOGO=IMAGEN.ID
+          left join DIRECCION on DATA_CONTACTO.DIRECCION_CONTACTO=DIRECCION.ID
           where NOMBRE_CORTO_VENDEDOR="${context.arguments[0]}";`,
           { type: QueryTypes.SELECT }
         )
 
         const imagenesBanner = await sequelize.query(
           `SELECT 
-            chasqui.IMAGEN.PATH
-          FROM chasqui.VENDEDOR 
-            left join chasqui.DATA_MULTIMEDIA on chasqui.DATA_MULTIMEDIA.idVendedor=chasqui.VENDEDOR.id
-            left join chasqui.DATA_PORTADA on chasqui.DATA_MULTIMEDIA.ID_DATA_PORTADA=chasqui.DATA_PORTADA.ID
-            left join chasqui.IMAGEN on chasqui.DATA_PORTADA.ID=chasqui.IMAGEN.ID_DATA_BANNER
+            IMAGEN.PATH
+          FROM VENDEDOR 
+            left join DATA_MULTIMEDIA on DATA_MULTIMEDIA.idVendedor=VENDEDOR.id
+            left join DATA_PORTADA on DATA_MULTIMEDIA.ID_DATA_PORTADA=DATA_PORTADA.ID
+            left join IMAGEN on DATA_PORTADA.ID=IMAGEN.ID_DATA_BANNER
           where NOMBRE_CORTO_VENDEDOR="${context.arguments[0]}";`,
           { type: QueryTypes.SELECT }
         )
@@ -86,10 +87,10 @@ module.exports = {
         return context
       }
     ],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [disallow()],
+    update: [disallow()],
+    patch: [disallow()],
+    remove: [disallow()]
   },
 
   after: {

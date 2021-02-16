@@ -19,6 +19,8 @@ const vendedorTagCobertura = require('./vendedor-tag-cobertura/vendedor-tag-cobe
 const tags = require('./tags/tags.service.js');
 const medallasProductores = require('./medallas-productores/medallas-productores.service.js');
 const productores = require('./productores/productores.service.js');
+const vendedorRetiroZonas = require('./vendedor-retiro-zonas/vendedor-retiro-zonas.service.js');
+const vendedorRetiroPuntos = require('./vendedor-retiro-puntos/vendedor-retiro-puntos.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(usuarios);
@@ -42,4 +44,6 @@ module.exports = function (app) {
   app.configure(tags);
   app.configure(medallasProductores);
   app.configure(productores);
+  app.configure(vendedorRetiroZonas);
+  app.configure(vendedorRetiroPuntos);
 };

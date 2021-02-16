@@ -35,6 +35,7 @@ module.exports = function (app) {
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     direcciones.hasOne(models.DATA_CONTACTO,{ foreignKey: 'direccion_contacto'});
     direcciones.belongsTo(models.CLIENTE, {foreignKey: 'id_cliente'});
+    direcciones.hasOne(models.PUNTO_DE_RETIRO,{ foreignKey: 'direccion'});
   };
 
   return direcciones;

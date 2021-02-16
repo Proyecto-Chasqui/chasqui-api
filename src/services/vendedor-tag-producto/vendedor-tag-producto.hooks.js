@@ -1,8 +1,9 @@
 //const { debug } = require('feathers-hooks-common');
+const { disallow } = require('feathers-hooks-common')
 
 module.exports = {
   before: {
-    all: [],
+    all: [disallow('rest')],
     find: [],
     get: [],
     create: [],
