@@ -22,7 +22,7 @@ module.exports = function (options = {}) {
     }
 
     if (context.params.query.id_medallas_productor !== undefined) {
-      id_medallas_productor = { 'id': context.params.query.id_medallas_productor };
+      id_medallas_productor = { 'id_caracteristica': context.params.query.id_medallas_productor };
       delete context.params.query.id_medallas_productor
     }
 

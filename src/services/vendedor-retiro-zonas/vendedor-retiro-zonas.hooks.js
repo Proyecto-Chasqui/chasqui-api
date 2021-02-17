@@ -28,7 +28,7 @@ module.exports = {
         
         const result = context.result.data.map(result =>( {
           geometry: {
-            coordinates: result.geo_area.coordinates[0].map( coor =>  ({ x: coor[0], y: coor[1] }) )
+            coordinates: result.geo_area?.coordinates[0].map( coor =>  ({ x: coor[0], y: coor[1] }) )
           },
           properties: {
             fechaCierre: result.fecha_cierre_pedidos,
