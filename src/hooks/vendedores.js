@@ -14,9 +14,9 @@ module.exports = (options = {}) => {
       TAG
     } = sequelize.models;
 
-    let id_tag_tipo_organizacion = {};
-    let id_tag_tipo_producto = {};
-    let id_tag_zona_cobertura = {};
+    let id_tag_tipo_organizacion = false;
+    let id_tag_tipo_producto = false;
+    let id_tag_zona_cobertura = false;
 
     if (context.params.query.tag_organizacion !== undefined) {
       id_tag_tipo_organizacion = {'id_tag_tipo_organizacion': context.params.query.tag_organizacion};
@@ -46,13 +46,13 @@ module.exports = (options = {}) => {
           include: [
             { model: TAG }
           ]
-         },
+        },
         { model: VENDEDOR_TAG_ZONA_COBERTURA,
           where: id_tag_zona_cobertura,
           include: [
             { model: TAG }
           ]
-         },
+        },
       ],
       raw: false,
     };
