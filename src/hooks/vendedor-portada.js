@@ -5,12 +5,13 @@
 module.exports = (options = {}) => {
   return async context => {
       if (context.params.query.nombre_corto_vendedor !== undefined) {
-        const sequelize = context.app.get('sequelizeClient')
+        const sequelize = context.app.get('sequelizeClient');
         const { QueryTypes } = require('sequelize');
         const result = await sequelize.query(
           `SELECT 
                 IMAGEN.PATH,
                 DATA_PORTADA.textoBienvenida,
+                DATA_PORTADA.PORTADA_VISIBLE,
                 DATA_CONTACTO.telefono,
                 DATA_CONTACTO.celular,
                 DATA_CONTACTO.email,
@@ -38,7 +39,7 @@ module.exports = (options = {}) => {
             left join DIRECCION on DATA_CONTACTO.DIRECCION_CONTACTO=DIRECCION.ID
             where NOMBRE_CORTO_VENDEDOR="${context.params.query.nombre_corto_vendedor}";`,
           { type: QueryTypes.SELECT }
-        )
+        );
 
         const imagenesBanner = await sequelize.query(
           `SELECT 
@@ -55,6 +56,7 @@ module.exports = (options = {}) => {
           urlLogo: result[0].PATH,
           urlImagenesBanner: imagenesBanner.map(img => img.PATH),
           textoPortada: result[0].textoBienvenida,
+          portadaVisible: result[0].PORTADA_VISIBLE,
           dataContacto: {
             direccion: {
               calle: result[0].CALLE,
