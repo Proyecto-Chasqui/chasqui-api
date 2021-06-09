@@ -1,9 +1,9 @@
-const { likeRegex } = require("../../hooks/misc.utils.js");
+
 
 module.exports = {
   before: {
     all: [],
-    find: [likeRegex],
+    find: [],
     get: [],
     create: [],
     update: [],

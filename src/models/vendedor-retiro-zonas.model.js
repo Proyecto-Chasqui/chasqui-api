@@ -5,11 +5,12 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const caracteristicas = sequelizeClient.define('CARACTERISTICA', {
+  const vendedorRetiroZonas = sequelizeClient.define('ZONA', {
     nombre: { type: DataTypes.STRING, allowNull: false },
-    eliminada: { type: DataTypes.BOOLEAN, allowNull: false },
-    descripcion: { type: DataTypes.STRING, allowNull: false },
-    path_imagen: { type: DataTypes.STRING, allowNull: false },
+    id_vendedor: { type: DataTypes.INTEGER, allowNull: false },
+    fecha_cierre_pedidos: { type: DataTypes.DATE },
+    descripcion: { type: DataTypes.STRING },
+    geo_area: { type: DataTypes.GEOMETRY },
   }, {
     hooks: {
       beforeCount(options) {
@@ -19,11 +20,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  caracteristicas.associate = function (models) {
+  vendedorRetiroZonas.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    caracteristicas.belongsToMany(models.PRODUCTO, {through: 'PRODUCTO_CARACTERISTICA', foreignKey: 'id_producto_caracteristica' });
   };
 
-  return caracteristicas;
+  return vendedorRetiroZonas;
 };

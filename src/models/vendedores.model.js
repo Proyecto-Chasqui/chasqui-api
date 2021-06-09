@@ -13,7 +13,6 @@ module.exports = function (app) {
     mapa: { type: DataTypes.STRING, allowNull: false },
     url: { type: DataTypes.STRING, allowNull: false },
     nombre_corto_vendedor: { type: DataTypes.STRING, allowNull: false },
-    estrategias_utilizadas: { type: DataTypes.INTEGER, allowNull: false },
     tiempo_vencimiento_pedidos: { type: DataTypes.INTEGER, allowNull: false },
     id_data_multimedia: { type: DataTypes.INTEGER, allowNull: false },
     visible_en_multicatalogo: { type: DataTypes.BOOLEAN, allowNull: false },
@@ -31,7 +30,12 @@ module.exports = function (app) {
   vendedores.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    vendedores.hasOne(models.USUARIO,{ foreignKey: 'id'});
+    vendedores.belongsTo(models.ESTRATEGIA_DE_COMERCIALIZACION, { foreignKey: 'estrategias_utilizadas'});
     vendedores.hasMany(models.CATEGORIA,{ foreignKey: 'id_vendedor'});
+    vendedores.hasMany(models.VENDEDOR_TAG_TIPO_PRODUCTO,{ foreignKey: 'id_vendedor'});
+    vendedores.hasMany(models.VENDEDOR_TAG_ZONA_COBERTURA,{ foreignKey: 'id_vendedor'});
+    vendedores.hasMany(models.VENDEDOR_TAG_TIPO_ORGANIZACION,{ foreignKey: 'id_vendedor'});
   };
 
   return vendedores;

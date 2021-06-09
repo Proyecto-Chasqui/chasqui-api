@@ -23,6 +23,7 @@ module.exports = function (app) {
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     productos.hasMany(models.VARIANTE, { foreignKey: 'id_producto'});
     productos.belongsTo(models.CATEGORIA, {foreignKey: 'id_categoria'});
+    productos.belongsTo(models.PRODUCTOR, {foreignKey: 'id_productor'});
     productos.belongsToMany(models.CARACTERISTICA, {through: 'PRODUCTO_CARACTERISTICA', foreignKey: 'id_producto'});
   };
 
