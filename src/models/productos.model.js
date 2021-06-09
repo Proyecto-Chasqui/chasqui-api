@@ -9,6 +9,7 @@ module.exports = function (app) {
     nombre: { type: DataTypes.STRING, allowNull: false },
     id_productor: { type: DataTypes.INTEGER, allowNull: false },
     ocultado: { type: DataTypes.BOOLEAN, allowNull: false },
+    destacado: { type: DataTypes.BOOLEAN, allowNull: false },
   }, {
     hooks: {
       beforeCount(options) {
