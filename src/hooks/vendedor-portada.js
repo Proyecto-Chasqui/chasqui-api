@@ -52,9 +52,21 @@ module.exports = (options = {}) => {
           { type: QueryTypes.SELECT }
         )
 
+        const imagenesPortada = await sequelize.query(
+          `SELECT 
+              IMAGEN.PATH
+            FROM VENDEDOR 
+              left join DATA_MULTIMEDIA on DATA_MULTIMEDIA.idVendedor=VENDEDOR.id
+              left join DATA_PORTADA on DATA_MULTIMEDIA.ID_DATA_PORTADA=DATA_PORTADA.ID
+              left join IMAGEN on DATA_PORTADA.ID=IMAGEN.ID_DATA_PORTADA
+            where NOMBRE_CORTO_VENDEDOR="${context.params.query.nombre_corto_vendedor}";`,
+          { type: QueryTypes.SELECT }
+        )
+
         context.result = {
           urlLogo: result[0].PATH,
           urlImagenesBanner: imagenesBanner.map(img => img.PATH),
+          urlImagenesPortada: imagenesPortada.map(img => img.PATH),
           textoPortada: result[0].textoBienvenida,
           portadaVisible: result[0].PORTADA_VISIBLE,
           dataContacto: {
@@ -74,12 +86,12 @@ module.exports = (options = {}) => {
               comentario: result[0].COMENTARIO,
               pais: result[0].PAIS,
               provincia: result[0].PROVINCIA,
-            }
+            },
+            telefono: result[0].telefono,
+            celular: result[0].celular,
+            email: result[0].email,
+            url: result[0].url
           },
-          telefono: result[0].telefono,
-          celular: result[0].celular,
-          email: result[0].email,
-          url: result[0].url
         }
 
       }
