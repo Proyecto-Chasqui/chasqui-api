@@ -37,8 +37,11 @@ module.exports = (options = {}) => {
             left join DATA_CONTACTO on DATA_MULTIMEDIA.ID_DATA_CONTACTO=DATA_CONTACTO.ID
             left join IMAGEN on DATA_PORTADA.ID_IMAGEN_LOGO=IMAGEN.ID
             left join DIRECCION on DATA_CONTACTO.DIRECCION_CONTACTO=DIRECCION.ID
-            where NOMBRE_CORTO_VENDEDOR="${context.params.query.nombre_corto_vendedor}";`,
-        { type: QueryTypes.SELECT }
+            where NOMBRE_CORTO_VENDEDOR= :nombreCorto`,
+        { 
+          replacements: { nombreCorto: context.params.query.nombre_corto_vendedor },
+          type: QueryTypes.SELECT 
+        }
       );
 
       const imagenesBanner = await sequelize.query(
@@ -48,8 +51,11 @@ module.exports = (options = {}) => {
               left join DATA_MULTIMEDIA on DATA_MULTIMEDIA.idVendedor=VENDEDOR.id
               left join DATA_PORTADA on DATA_MULTIMEDIA.ID_DATA_PORTADA=DATA_PORTADA.ID
               left join IMAGEN on DATA_PORTADA.ID=IMAGEN.ID_DATA_BANNER
-            where NOMBRE_CORTO_VENDEDOR="${context.params.query.nombre_corto_vendedor}";`,
-        { type: QueryTypes.SELECT }
+            where NOMBRE_CORTO_VENDEDOR= :nombreCorto`,
+        { 
+          replacements: { nombreCorto: context.params.query.nombre_corto_vendedor },
+          type: QueryTypes.SELECT 
+        }
       );
 
       const imagenesPortada = await sequelize.query(
@@ -59,8 +65,11 @@ module.exports = (options = {}) => {
               left join DATA_MULTIMEDIA on DATA_MULTIMEDIA.idVendedor=VENDEDOR.id
               left join DATA_PORTADA on DATA_MULTIMEDIA.ID_DATA_PORTADA=DATA_PORTADA.ID
               left join IMAGEN on DATA_PORTADA.ID=IMAGEN.ID_DATA_PORTADA
-            where NOMBRE_CORTO_VENDEDOR="${context.params.query.nombre_corto_vendedor}";`,
-        { type: QueryTypes.SELECT }
+            where NOMBRE_CORTO_VENDEDOR= :nombreCorto`,
+        { 
+          replacements: { nombreCorto: context.params.query.nombre_corto_vendedor },
+          type: QueryTypes.SELECT 
+        }
       );
 
       context.result = {
