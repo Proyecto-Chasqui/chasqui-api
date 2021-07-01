@@ -1,8 +1,7 @@
-const { likeRegex } = require("../../hooks/misc.utils.js");
+const { likeRegex } = require('../../hooks/misc.utils.js');
 const vendedores = require('../../hooks/vendedores');
 const vendedorPortada = require('../../hooks/vendedor-portada');
-//const { debug } = require('feathers-hooks-common');
-const { disallow } = require('feathers-hooks-common')
+const { disallow } = require('feathers-hooks-common');
 
 
 module.exports = {
