@@ -11,7 +11,7 @@ module.exports = function (app) {
     precio: { type: DataTypes.INTEGER, allowNull: false },
     nombre: { type: DataTypes.STRING, allowNull: false },
     destacado: { type: DataTypes.BOOLEAN, allowNull: false },
-    reservados: { type: DataTypes.BOOLEAN, allowNull: false },
+    reservados: { type: DataTypes.INTEGER, allowNull: false },
     codigo: { type: DataTypes.STRING, allowNull: false },
     incentivo: { type: DataTypes.INTEGER, allowNull: false },
   }, {

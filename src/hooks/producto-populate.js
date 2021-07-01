@@ -13,17 +13,17 @@ module.exports = function (options = {}) {
 
     if (context.params.query.id_vendedor !== undefined) {
       id_vendedor = { 'id_vendedor': context.params.query.id_vendedor };
-      delete context.params.query.id_vendedor
+      delete context.params.query.id_vendedor;
     }
 
     if (context.params.query.id_medallas_producto !== undefined) {
       id_medallas_producto = { 'id': context.params.query.id_medallas_producto };
-      delete context.params.query.id_medallas_producto
+      delete context.params.query.id_medallas_producto;
     }
 
     if (context.params.query.id_medallas_productor !== undefined) {
       id_medallas_productor = { 'id_caracteristica': context.params.query.id_medallas_productor };
-      delete context.params.query.id_medallas_productor
+      delete context.params.query.id_medallas_productor;
     }
 
     context.params.sequelize = {
@@ -35,6 +35,7 @@ module.exports = function (options = {}) {
           where: id_medallas_producto
         },
         { model: VARIANTE,
+          where: sequelize.literal('stock - reservados > 0 '),
           include: [
             { model: IMAGEN }
           ]
